@@ -11,11 +11,11 @@ class intra_Leaderboard extends Model
     protected $table = 'intra_leaderboard';
     protected $fillable = ['college_id', 'event_id', 'gold'];
 
-    public function intra_college(){
-        return $this->belongsTo(intra_Colleges::class);
+    public function intraCollege(){
+        return $this->belongsTo(intraColleges::class);
     }
 
-    public function intra_event(){
-        return $this->belongsTo(intra_Events::class);
+    public function intraEvent(){
+        return $this->belongsTo(intraEvent::class);
     }
 }

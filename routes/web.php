@@ -14,6 +14,9 @@ use App\Http\Controllers\Admin\EventSelectionController;
 // Database Controllers
 use App\Http\Controllers\Admin\Intramurals\IntraEventController;
 
+// AI OCR Feature Controller
+use App\Http\Controllers\Admin\OCRController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +48,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 // Intramurals Page Navigation Routes
 Route::get('/intramurals/Department Points/department-points', [IntramuralsController::class, 'departmentPoints'])->name('intramurals.Department Points.department-points');
 Route::get('/intramurals/Manage Departments/manage-departments', [IntramuralsController::class, 'manageDepartments'])->name('intramurals.Manage Departments.manage-departments');
-Route::get('/intramurals/Manage Events/manage-events', [IntramuralsController::class, 'manageEvents'])->name('intramurals.Manage Events.manage-events');
+Route::get('/intramurals/Manage Events/manage-events', [IntraEventController::class, 'index'])->name('intramurals.Manage Events.manage-events');
 Route::get('/intramurals/Intramurals Customize/customize', [IntramuralsController::class, 'customize'])->name('intramurals.Intramurals Customize.intramurals-customize');
 
 
@@ -63,3 +66,20 @@ Route::get('/otherEvents/Team Points/team-points', [OtherEventsController::class
 
 // Intramurals Create Event Routes
 Route::resource('intra-events', IntraEventController::class);
+
+// Bulk store extracted events (from OCR)
+Route::post('/intra-events/bulk', [IntraEventController::class, 'storeMultiple'])->name('intra-events.store-multiple');
+
+
+
+
+
+
+
+
+
+
+//  ------------------------OCR Test Routes-------------------------||
+// OCR Feature
+Route::get('/intramurals/Manage Events/add-events', [OCRController::class, 'index'])->name('ocr.index');
+Route::post('/ocr/vision-extract', [OCRController::class, 'visionExtract'])->name('admin.ocr.extract');

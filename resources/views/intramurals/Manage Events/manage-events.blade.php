@@ -71,46 +71,38 @@
                     </thead>
 
                     <!-- Table Body -->
-                    <tbody class="text-dark dark:text-light text-sm">
+                    <tbody class="text-dark dark:text-light text-base">
+                        @foreach($events as $index => $event)
                         <tr class="hover:bg-[#FFE9C6]/70 dark:hover:bg-zinc-800/20 transition">
-                            <td class="px-4 py-3 border border-gray-400 dark:border-gray-600 text-center">1</td>
-                            <td class="px-4 py-3 border border-gray-400 dark:border-gray-600">Charcoal Rendering</td>
-                            <td class="px-4 py-3 border border-gray-400 dark:border-gray-600">Visual Arts</td>
+                            <td class="px-4 py-3 border border-gray-400 dark:border-gray-600 text-center">{{ $index + 1 }}</td>
+                            
+                            <td class="flex justify-start items-center gap-2 px-4 py-3 border border-gray-400 dark:border-gray-600">
+                                <div class="bg-[rgba(193,114,10,0.59)] dark:bg-zinc-700 rounded-full p-1">
+                                    @if($event->icon)
+                                <img src="{{ asset('icons/' . $event->icon) }}" alt="{{ $event->event_name }}" class="w-6 h-6 object-contain rounded-full">
+                                @endif
+                                </div>
+                                {{ $event->event_name }}</td>
+                            <td class="px-4 py-3 border border-gray-400 dark:border-gray-600">{{ $event->category }}</td>
                             <td class="px-4 py-3 border border-gray-400 dark:border-gray-600 text-center">
                                 <div class="flex justify-center items-center gap-2">
                                     
                                 <!-- Reserve space for Bracket link (even if empty) -->
-                                    <div class="w-16 text-orange-500 text-sm text-right">
+                                    <!-- <div class="w-16 text-orange-500 text-base text-right">
                                     <a href="#" class="hover:underline">Bracket</a>
                                     </div>
-                                    <span class="text-gray-400">|</span>
-                                    <div class="text-blue-600 text-sm">
+                                    <span class="text-gray-400">|</span> -->
+                                    <div class="text-blue-600 text-base">
                                     <a href="#" class="hover:underline">Edit</a>
                                     </div>
                                     <span class="text-gray-400">|</span>
-                                    <div class="text-red-600 text-sm">
+                                    <div class="text-red-600 text-base">
                                     <a href="#" class="hover:underline">Delete</a>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                        <tr class="hover:bg-[#FFE9C6]/70 dark:hover:bg-zinc-800/20 transition">
-                            <td class="px-4 py-3 border border-gray-400 dark:border-gray-600 text-center">2</td>
-                            <td class="px-4 py-3 border border-gray-400 dark:border-gray-600">Swimming</td>
-                            <td class="px-4 py-3 border border-gray-400 dark:border-gray-600">Athletics</td>
-                            <td class="px-4 py-3 border border-gray-400 dark:border-gray-600 text-center">
-                                <div class="flex justify-center items-center gap-2">
-                                    <div class="w-20"></div> <!-- Empty space keeps columns aligned -->
-                                    <div class="text-blue-600 text-sm">
-                                    <a href="#" class="hover:underline">Edit</a>
-                                    </div>
-                                    <span class="text-gray-400">|</span>
-                                    <div class="text-red-600 text-sm">
-                                    <a href="#" class="hover:underline">Delete</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                        @endforeach
                     </tbody>
                     </table>
                 </div>

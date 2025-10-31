@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('event_name', 150);
             $table->string('category', 150);
             $table->string('description', 225);
+            $table->string('icon', 100)->nullable();
             $table->timestamps();
         });
     }
