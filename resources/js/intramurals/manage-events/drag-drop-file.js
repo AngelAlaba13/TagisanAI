@@ -1,18 +1,20 @@
 /******************************************************
- * 🧩 PART 1 — FILE UPLOAD, PREVIEW & DRAG-DROP HANDLER
+ *PART 1 — FILE UPLOAD, PREVIEW & DRAG-DROP HANDLER
  ******************************************************/
 const fileInput = document.getElementById('ocrFileInput');
 const previewContainer = document.getElementById('ocrPreview');
 const dropZone = document.getElementById('ocrDropZone');
-const warning = document.getElementById('ocrWarning');
 
 let selectedFile = null; // single file only
 
 // Show floating warning
 function showWarning(message) {
+  const warning = document.getElementById('ocrWarning');
+  if (!warning) return;
+
   warning.textContent = message;
-  warning.classList.remove('hidden');
-  warning.classList.add('opacity-100', 'transition-opacity', 'duration-300');
+  warning.classList.remove('hidden', 'translate-x-10', 'opacity-0');
+  warning.classList.add('translate-x-0', 'opacity-100');
 
   setTimeout(() => {
     warning.classList.add('opacity-0');
@@ -20,7 +22,20 @@ function showWarning(message) {
   }, 3000);
 }
 
-// Update preview
+function showSuccess(message) {
+  const success = document.getElementById('ocrSuccess');
+  if (!success) return;
+
+  success.textContent = message;
+  success.classList.remove('hidden', 'translate-x-10', 'opacity-0');
+  success.classList.add('translate-x-0', 'opacity-100');
+
+  setTimeout(() => {
+    success.classList.add('opacity-0');
+    setTimeout(() => success.classList.add('hidden'), 300);
+  }, 3000);
+}
+
 function previewFile() {
   previewContainer.innerHTML = '';
 
@@ -89,12 +104,14 @@ dropZone.addEventListener('drop', e => {
   }
 
   selectedFile = file;
-  fileInput.files = e.dataTransfer.files; // sync input
+  fileInput.files = e.dataTransfer.files;
   previewFile();
 });
 
+
+
 /********************************************************
- * 🧠 PART 2 — OCR EXTRACTION + EVENT CARD RENDERING (AJAX)
+ *PART 2 — OCR EXTRACTION + EVENT CARD RENDERING (AJAX)
  ********************************************************/
 document.getElementById('ocrForm').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -139,7 +156,7 @@ document.getElementById('ocrForm').addEventListener('submit', async (e) => {
           const text = await response.text();
           console.error('OCR fetch failed:', response.status, response.statusText);
           console.error('Response (text):', text);
-          showWarning('Server error during OCR extraction. See console for details.');
+          showWarning('Server error during OCR extraction');
           try { const errData = JSON.parse(text); console.warn('Parsed error JSON:', errData); } catch (_) {}
           return;
         }
@@ -162,9 +179,9 @@ document.getElementById('ocrForm').addEventListener('submit', async (e) => {
             card.className = "bg-white dark:bg-zinc-800 shadow-md rounded-xl border border-gray-200 dark:border-gray-700 p-6 mb-6 space-y-4";
 
             card.innerHTML = `
-              <div class="flex justify-between items-center">
-                <h4 class="text-lg font-semibold text-blue-600">Event ${index + 1}</h4>
-                <button type="button" class="deleteBtn text-red-500 hover:text-red-700 font-semibold">🗑 Delete</button>
+              <div class="flex justify-between items-center mb-16">
+                <h4 class="text-xl font-semibold text-green-600">Event ${index + 1}</h4>
+                <button type="button" class="deleteBtn text-red-500 hover:text-red-700 font-semibold">Delete</button>
               </div>
 
               <div class="flex gap-10">
@@ -237,11 +254,12 @@ document.getElementById('ocrForm').addEventListener('submit', async (e) => {
               eventsContainer.appendChild(raw);
               resultDiv.classList.remove('hidden');
             } else {
-              alert('No recognizable events found.');
+              showWarning('No recognizable events found. Please review your file or try again.');
+              
             }
         } catch (error) {
             loading.classList.add('hidden');
-            alert('Error during OCR extraction.');
+            showWarning('Error during OCR extraction. Please try again.');
             console.error(error);
           }
         });
@@ -264,10 +282,9 @@ document.getElementById('ocrForm').addEventListener('submit', async (e) => {
         };
       });
 
-      // Basic client-side validation
-      const invalid = events.find(ev => !ev.event_name || !ev.category);
+      const invalid = events.find(ev => !ev.event_name || !ev.category || !ev.description || !ev.icon);
       if (invalid) {
-        showWarning('Each event must have a name and category before saving.');
+        showWarning('Each event must have complete details before saving.');
         return;
       }
 
@@ -286,14 +303,18 @@ document.getElementById('ocrForm').addEventListener('submit', async (e) => {
         if (!res.ok) {
           const text = await res.text();
           console.error('Bulk save failed', res.status, text);
-          showWarning('Save failed. See console for details.');
+          showWarning('Save failed. Please check the details and try again.');
           return;
         }
 
         const data = await res.json();
-        // success — clear cards and show message
         document.getElementById('eventsContainer').innerHTML = '';
-        showWarning(data.message || 'Events saved');
+        showSuccess('All events saved successfully! Redirecting you back...');
+
+        setTimeout(() => {
+            window.location.href = '/intramurals/Manage Events/manage-events';
+        }, 2000);
+
       } catch (err) {
         console.error('Save extracted events error', err);
         showWarning('Error saving events.');
@@ -304,5 +325,7 @@ document.getElementById('ocrForm').addEventListener('submit', async (e) => {
       document.getElementById('eventsContainer').innerHTML = '';
     }
   });
+
+  
     
   

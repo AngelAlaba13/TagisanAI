@@ -14,9 +14,9 @@
         <div class="bg-white dark:bg-zinc-800 shadow-md shadow-black/25 rounded-xl p-10 w-full max-w-4xl">
             <h2 class="text-2xl md:text-4xl font-semibold text-center text-dark dark:text-light mb-16">Add New Event</h2>
 
+            <!-- To intraEvent Controller 'store' -->
             <form action="{{ route('intra-events.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-
                 <div class="flex gap-10">
                     <!-- Event Name -->
                     <div class=" flex-[40%] mb-6">
@@ -52,8 +52,6 @@
                         <?php
                             if (isset($icons) && is_object($icons) && method_exists($icons, 'map')) {
                                 $__icons_for_js = $icons->map(fn($i) => basename($i))->values()->all();
-                            } elseif (isset($icons) && is_array($icons)) {
-                                $__icons_for_js = array_map(fn($i) => basename($i), $icons);
                             } else {
                                 $__icons_for_js = [];
                             }
@@ -118,7 +116,6 @@
                             <p class="text-gray-500 dark:text-gray-300 font-medium">Drag and drop your file here</p>
                             <p class="my-2 text-gray-400">or</p>
 
-                            <!-- File Input (use single 'file' name so server validation matches) -->
                             <input type="file" name="file" id="ocrFileInput" class="hidden" accept="image/*,.pdf" />
                             <label for="ocrFileInput" class="inline-block px-6 py-2 border border-orange-500 text-orange-500 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-orange-700 transition">
                             Browse Files
@@ -137,11 +134,6 @@
                                 class="px-6 py-2 bg-[#ffc86237] text-black rounded-full hover:bg-[#ffc062be] transition mt-10 w-2/3 border-2 border-black/10">
                                 Extract Now
                             </button>
-
-                            <!-- Warning -->
-                            <div id="ocrWarning" class="fixed top-5 right-5 hidden bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg z-50">
-                                Maximum of 1 file is allowed!
-                            </div>
                         </div>
                     </div>
                 </form>
@@ -149,19 +141,26 @@
                 <!-- Loader -->
                 <div id="loading" class="text-center hidden">
                 <span class="loading loading-spinner loading-lg text-primary"></span>
-                <p class="text-gray-600 mt-2">Processing with Gemini Vision...</p>
+                <p class="text-gray-600 mt-2">Processing your file...</p>
                 </div>
 
                 <!-- Extracted Output -->
                 <div id="result" class="hidden space-y-4">
-                <h3 class="text-lg font-semibold text-blue-600">📋 Extracted Events</h3>
-                <div id="eventsContainer" class="space-y-3"></div>
-                <div class="flex gap-2 justify-end">
-                    <button id="saveExtractedBtn" class="px-6 py-2 bg-green-600 text-white rounded-lg  hover:bg-[#00b300]  transition">Save All Events</button>
-                    <button id="clearExtractedBtn" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Clear</button>
-                </div>
+                    <h3 class="text-2xl font-semibold text-green-600">Extracted Events</h3>
+                    <div id="eventsContainer" class="space-y-3"></div>
+                    <div class="flex gap-2 justify-end">
+                        <button id="saveExtractedBtn" class="px-6 py-2 bg-green-600 text-white rounded-lg  hover:bg-[#00b300]  transition">Save All Events</button>
+                        <button id="clearExtractedBtn" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Clear</button>
+                    </div>
                 </div>
 
+                <div id="ocrSuccess"
+                    class="hidden fixed top-6 right-6 bg-green-500 text-white px-5 py-3 rounded-lg shadow-lg z-50 transform translate-x-10 opacity-0 transition-all duration-300">
+                </div>
+
+                <div id="ocrWarning"
+                    class="hidden fixed top-6 right-6 bg-red-500 text-white px-5 py-3 rounded-lg shadow-lg z-50 transform translate-x-10 opacity-0 transition-all duration-300">
+                </div>
         </div>
     </div>
 

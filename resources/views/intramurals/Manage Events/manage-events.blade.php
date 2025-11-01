@@ -10,37 +10,36 @@
 <body class="bg-bglight dark:bg-bgdark min-h-screen w-full overflow-x-hidden font-poppins">
     @include('intramurals.intramurals-sidepanel')
 
-    <div class="min-h-screen pl-28 pt-12 pr-28">
+    <div class="min-h-screen pl-10 pr-10 md:pl-28 pt-12 md:pr-28">
         <!-- Page Header -->
-        <div>
-            <p class="text-4xl font-semibold text-dark dark:text-light">Manage Events</p>
-            <p class="text-lg text-dark/60 dark:text-light/60 py-2">
+        <div class=" flex flex-col justify-center items-center md:justify-start md:items-start">
+            <p class="text-xl md:text-4xl font-semibold text-dark dark:text-light">Manage Events</p>
+            <p class="text-center md:text-start text-sm md:text-lg text-dark/60 dark:text-light/60 py-2">
                 Add and update events for the event based on the handbook and schedule.
             </p>
         </div>
 
         <!-- Events Section -->
-        <div class="pt-20">
+        <div class="pt-10 md:pt-20">
             <!-- Header -->
-            <div class="flex items-center justify-between mb-8">
-                <div class="flex items-center gap-10">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-5">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-5">
                     <h1 class="text-2xl font-medium text-dark dark:text-light">Events</h1>
-                <!-- Search Bar Row -->
-                <div class="flex justify-center">
-                    <label class="input input-bordered flex items-center gap-2 w-[700px] bg-white dark:bg-zinc-800 border border-gray-400 dark:border-gray-500 shadow-sm">
-                        <input type="text" class="grow text-dark dark:text-white" placeholder="Search Event" />
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70 text-dark dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 21l-4.35-4.35m1.85-5.65a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </label>
-                </div>
+                    <!-- Search Bar Row -->
+                    <div class="flex justify-center">
+                        <label class="input input-bordered flex items-center gap-2 w-full md:w-[700px] bg-white dark:bg-zinc-800 border border-gray-400 dark:border-gray-500 shadow-sm">
+                            <input type="text" class="grow text-dark dark:text-white" placeholder="Search Event" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70 text-dark dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-4.35-4.35m1.85-5.65a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </label>
+                    </div>
                 </div>
                 <a href="{{ route('intra-events.create') }}" class="btn bg-[#E78E00] hover:bg-[#FFA13C] text-white border-none shadow-md shadow-gray-400/40 px-10">
                     Add Event
                 </a>
             </div>
-
 
             <!-- Category Header -->
             <div class="flex justify-between items-center text-sm italic text-dark/70 dark:text-light/70 mb-2">
@@ -74,7 +73,7 @@
                     <tbody class="text-dark dark:text-light text-base">
                         @foreach($events as $index => $event)
                         <tr class="hover:bg-[#FFE9C6]/70 dark:hover:bg-zinc-800/20 transition">
-                            <td class="px-4 py-3 border border-gray-400 dark:border-gray-600 text-center">{{ $index + 1 }}</td>
+                            <td class="px-4 py-3 border border-gray-400 dark:border-gray-600 text-center">{{ $events->firstItem() ? $events->firstItem() + $index : $index + 1 }}</td>
                             
                             <td class="flex justify-start items-center gap-2 px-4 py-3 border border-gray-400 dark:border-gray-600">
                                 <div class="bg-[rgba(193,114,10,0.59)] dark:bg-zinc-700 rounded-full p-1">
@@ -93,12 +92,16 @@
                                     </div>
                                     <span class="text-gray-400">|</span> -->
                                     <div class="text-blue-600 text-base">
-                                    <a href="#" class="hover:underline">Edit</a>
+                                    <a href="{{ route('intra-events.edit', $event->id) }}" class="hover:underline">Edit</a>
                                     </div>
                                     <span class="text-gray-400">|</span>
-                                    <div class="text-red-600 text-base">
-                                    <a href="#" class="hover:underline">Delete</a>
-                                    </div>
+                                    <form action="{{ route('intra-events.destroy', $event->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <div class="text-red-600 text-base">
+                                            <button class="hover:underline">Delete</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -106,11 +109,12 @@
                     </tbody>
                     </table>
                 </div>
+                
             </div>
-
         </div>
-
-
+        <div class="mt-6">
+            {{ $events->links('vendor.pagination.custom-tailwind') }}
+        </div>
     </div>
     @include('layout.footer')
 </body>

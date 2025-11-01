@@ -10,19 +10,19 @@
 <body class="bg-bglight dark:bg-bgdark min-h-screen w-full overflow-x-hidden font-poppins">
   @include('intramurals.intramurals-sidepanel')
 
-  <div class="min-h-screen pl-28 pt-12 pr-28">
+  <div class="min-h-screen pl-10 pr-10 md:pl-28 pt-12 md:pr-28">
     <!-- Page Header -->
-    <div>
-      <p class="text-4xl font-semibold text-dark dark:text-light">Manage Departments</p>
-      <p class="text-lg text-dark/60 dark:text-light/60 py-2">
+    <div class=" flex flex-col justify-center items-center md:justify-start md:items-start">
+      <p class="text-xl md:text-4xl font-semibold text-dark dark:text-light">Manage Departments</p>
+      <p class="text-center md:text-start text-sm md:text-lg text-dark/60 dark:text-light/60 py-2">
         Manage and view all college departments with their respective governors.
       </p>
     </div>
 
     <!-- Department Section -->
-    <div class="pt-20">
+    <div class="pt-10 md:pt-20">
       <!-- Header -->
-      <div class="flex justify-between items-center mb-6">
+      <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-5">
         <h1 class="text-2xl font-medium text-dark dark:text-light">Departments</h1>
         <button class="btn bg-[#E78E00] hover:bg-[#FFA13C] text-white border-none shadow-md px-6">
           Add Department

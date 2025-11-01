@@ -17,6 +17,9 @@ use App\Http\Controllers\Admin\Intramurals\IntraEventController;
 // AI OCR Feature Controller
 use App\Http\Controllers\Admin\OCRController;
 
+// Error Handling Controllers
+use App\Http\Controllers\ErrorHandlingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -64,11 +67,23 @@ Route::get('/otherEvents/Team Points/team-points', [OtherEventsController::class
 
 // ------------------------DATABASES ROUTES-------------------------||
 
-// Intramurals Create Event Routes
+// Intramurals Create Event Routes PARA MAKA CRUD
 Route::resource('intra-events', IntraEventController::class);
-
-// Bulk store extracted events (from OCR)
 Route::post('/intra-events/bulk', [IntraEventController::class, 'storeMultiple'])->name('intra-events.store-multiple');
+
+// Intramurals Edit Event Route
+Route::put('/intra-events/{intra_event}', [IntraEventController::class, 'update'])->name('intra-events.update');
+
+// Intramurals Delete Event Route
+Route::delete('intra-events/{intra_event}', [IntraEventController::class, 'destroy'])->name('intra-events.destroy');
+
+
+
+
+// ---------------------ERROR HANDLING ROUTES------------------------||
+Route::get('/error/520', [App\Http\Controllers\ErrorHandlingController::class, 'error520'])->name('error-handling.error520');
+
+
 
 
 
