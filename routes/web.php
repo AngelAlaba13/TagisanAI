@@ -11,8 +11,11 @@ use App\Http\Controllers\OtherEventsController;
 use App\Http\Controllers\Admin\EventSelectionController;
 
 
-// Database Controllers
+// Database Controllers INTRAMURALS
 use App\Http\Controllers\Admin\Intramurals\IntraEventController;
+use App\Http\Controllers\Admin\Intramurals\IntraCollegeController;
+use App\Http\Controllers\Admin\Intramurals\IntraLeaderboardController;
+
 
 // AI OCR Feature Controller
 use App\Http\Controllers\Admin\OCRController;
@@ -49,8 +52,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 // ------------------------PAGE NAVIGATION ROUTES-------------------------||
 
 // Intramurals Page Navigation Routes
-Route::get('/intramurals/Department Points/department-points', [IntramuralsController::class, 'departmentPoints'])->name('intramurals.Department Points.department-points');
-Route::get('/intramurals/Manage Departments/manage-departments', [IntramuralsController::class, 'manageDepartments'])->name('intramurals.Manage Departments.manage-departments');
+Route::get('/intramurals/Department Points/department-points', [IntraLeaderboardController::class, 'index'])->name('intramurals.Department Points.department-points');
+Route::get('/intramurals/Manage Departments/manage-departments', [IntraCollegeController::class, 'index'])->name('intramurals.Manage Departments.manage-departments');
 Route::get('/intramurals/Manage Events/manage-events', [IntraEventController::class, 'index'])->name('intramurals.Manage Events.manage-events');
 Route::get('/intramurals/Intramurals Customize/customize', [IntramuralsController::class, 'customize'])->name('intramurals.Intramurals Customize.intramurals-customize');
 
@@ -67,6 +70,7 @@ Route::get('/otherEvents/Team Points/team-points', [OtherEventsController::class
 
 // ------------------------DATABASES ROUTES-------------------------||
 
+// ------------------EVENTS--------------------||
 // Intramurals Create Event Routes PARA MAKA CRUD
 Route::resource('intra-events', IntraEventController::class);
 Route::post('/intra-events/bulk', [IntraEventController::class, 'storeMultiple'])->name('intra-events.store-multiple');
@@ -76,6 +80,25 @@ Route::put('/intra-events/{intra_event}', [IntraEventController::class, 'update'
 
 // Intramurals Delete Event Route
 Route::delete('intra-events/{intra_event}', [IntraEventController::class, 'destroy'])->name('intra-events.destroy');
+
+
+
+// - --------------COLLEGES--------------------||
+Route::resource('intra-colleges', IntraCollegeController::class);
+
+// Intramurals Edit Colleges Route
+Route::put('/intra-colleges/{intra_college}', [IntraCollegeController::class, 'update'])->name('intra-colleges.update');
+
+// Intramurals Delete Event Route
+Route::delete('intra-colleges/{intra_college}', [IntraCollegeController::class, 'destroy'])->name('intra-colleges.destroy');
+
+
+// ------------------LEADERBOARD--------------------||
+// Update college points
+Route::put('/intra-leaderboard/{college_id}', [IntraLeaderboardController::class, 'update'])->name('intra-leaderboard.update');
+
+// Set overall ranking
+Route::post('/intra-leaderboard/set-overall', [IntraLeaderboardController::class, 'setOverallRanking'])->name('intra-leaderboard.set-overall');
 
 
 

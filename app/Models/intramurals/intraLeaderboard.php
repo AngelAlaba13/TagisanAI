@@ -5,7 +5,7 @@ namespace App\Models\intramurals;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class intra_Leaderboard extends Model
+class intraLeaderboard extends Model
 {
     protected $connection = 'intra';
     protected $table = 'intra_leaderboard';

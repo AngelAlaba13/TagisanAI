@@ -5,7 +5,7 @@ namespace App\Models\intramurals;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class intra_Colleges extends Model
+class intraColleges extends Model
 {
     protected $connection = 'intra';
     protected $table = 'intra_colleges';

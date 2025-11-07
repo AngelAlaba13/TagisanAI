@@ -32,6 +32,7 @@
       <!-- Table Container -->
       <div class="card bg-[#ffeed8] dark:bg-zinc-700 shadow-md">
         <div class="overflow-x-auto">
+          
           <table class="table w-full border border-gray-400/70 dark:border-gray-600 border-collapse">
 
             <!-- Table Head -->
@@ -46,28 +47,18 @@
 
             <!-- Table Body -->
             <tbody class="text-dark dark:text-light text-base">
+              @foreach($leaderboard as $item)
               <tr class="hover:bg-[#FFE9C6]/70 dark:hover:bg-zinc-800/20 transition">
-                <td class="px-6 py-4 font-bold border border-gray-400/70 dark:border-gray-600">1</td>
+                <td class="px-6 py-4 font-bold border border-gray-400/70 dark:border-gray-600">{{ $item->rank }}</td>
                 <td class="px-6 py-4 border border-gray-400/70 dark:border-gray-600">
-                  <span class="font-bold">CITE</span> College of Information Technology Education
+                  <span class="font-bold">{{ $item->IntraCollege->college_code}}</span> {{ $item->IntraCollege->college_name }}
                 </td>
-                <td class="text-center px-6 py-4 border border-gray-400/70 dark:border-gray-600">46</td>
+                <td class="text-center px-6 py-4 border border-gray-400/70 dark:border-gray-600">{{ $item->total_gold }}</td>
                 <td class="text-center px-6 py-4 border border-gray-400/70 dark:border-gray-600">
                   <button class="btn btn-sm text-xs bg-blue-600 hover:bg-blue-700 text-white border-none px-2">Update</button>
                 </td>
               </tr>
-
-              <tr class="hover:bg-[#FFE9C6]/70 dark:hover:bg-zinc-800/20 transition">
-                <td class="px-6 py-4 font-bold border border-gray-400/70 dark:border-gray-600">1</td>
-                <td class="px-6 py-4 border border-gray-400/70 dark:border-gray-600">
-                  <span class="font-bold">CITE</span> College of Information Technology Education
-                </td>
-                <td class="text-center px-6 py-4 border border-gray-400/70 dark:border-gray-600">46</td>
-                <td class="text-center px-6 py-4 border border-gray-400/70 dark:border-gray-600">
-                  <button class="btn btn-sm text-xs bg-blue-600 hover:bg-blue-700 text-white border-none px-2">Update</button>
-                </td>
-              </tr>
-
+              @endforeach
              
             </tbody>
           </table>
