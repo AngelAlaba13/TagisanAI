@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\intramurals\intraLeaderboard;
 use App\Models\intramurals\intraColleges;
+use App\Models\intramurals\intraEvent;
 use Illuminate\Support\Facades\DB;
 
 class IntraLeaderboardController extends Controller
@@ -81,6 +82,7 @@ class IntraLeaderboardController extends Controller
         $entry->save();
 
         return redirect()->back()->with('success', 'College score updated successfully.');
+        
     }
 
     /**
@@ -101,6 +103,49 @@ class IntraLeaderboardController extends Controller
 
         return redirect()->back()->with('success', 'Overall ranking updated successfully.');
     }
+
+    public function eventList()
+    {
+        $events = intraEvent::all();
+        return view('intramurals.Department Points.event-list', compact('events'));
+    }
+
+
+    public function editGold($eventId)
+    {
+        $event = intraEvent::findOrFail($eventId);
+        $colleges = intraColleges::all();
+
+        $existingGolds = intraLeaderboard::where('event_id', $event->id)
+                            ->pluck('gold', 'college_id')
+                            ->toArray();
+
+        return view('intramurals.Department Points.edit-gold', compact('event', 'colleges', 'existingGolds'));
+    }
+
+
+    // Save gold points for the selected event
+    public function updateGold(Request $request, $eventId)
+    {
+        $request->validate([
+            'gold' => 'required|array',
+            'gold.*' => 'integer|min:0',
+        ]);
+
+        $event = intraEvent::findOrFail($eventId);
+        $data = $request->input('gold'); // array: college_id => gold
+
+        foreach ($data as $collegeId => $gold) {
+            intraLeaderboard::updateOrCreate(
+                ['event_id' => $event->id, 'college_id' => $collegeId],
+                ['gold' => $gold]
+            );
+        }
+
+        return redirect()->route('intramurals.Department Points.event-list')
+                        ->with('success', 'Gold points updated successfully!');
+    }
+
 
     /**
      * Remove the specified resource from storage.

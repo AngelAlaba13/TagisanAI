@@ -12,10 +12,10 @@ class intraLeaderboard extends Model
     protected $fillable = ['college_id', 'event_id', 'gold'];
 
     public function intraCollege(){
-        return $this->belongsTo(intraColleges::class);
+        return $this->belongsTo(intraColleges::class, 'college_id', 'id');
     }
 
     public function intraEvent(){
-        return $this->belongsTo(intraEvent::class);
+        return $this->belongsTo(intraEvent::class, 'event_id', 'id');
     }
 }

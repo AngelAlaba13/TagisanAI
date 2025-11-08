@@ -17,6 +17,11 @@ use App\Http\Controllers\Admin\Intramurals\IntraCollegeController;
 use App\Http\Controllers\Admin\Intramurals\IntraLeaderboardController;
 
 
+// User Controllers INTRAMURALS
+use App\Http\Controllers\Admin\Intramurals\UserLeaderboardController;
+use App\Http\Controllers\Admin\Intramurals\UserEventController;
+
+
 // AI OCR Feature Controller
 use App\Http\Controllers\Admin\OCRController;
 
@@ -49,7 +54,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
 
-// ------------------------PAGE NAVIGATION ROUTES-------------------------||
+// ------------------------ADMIN PAGE NAVIGATION ROUTES-------------------------||
 
 // Intramurals Page Navigation Routes
 Route::get('/intramurals/Department Points/department-points', [IntraLeaderboardController::class, 'index'])->name('intramurals.Department Points.department-points');
@@ -98,7 +103,31 @@ Route::delete('intra-colleges/{intra_college}', [IntraCollegeController::class, 
 Route::put('/intra-leaderboard/{college_id}', [IntraLeaderboardController::class, 'update'])->name('intra-leaderboard.update');
 
 // Set overall ranking
-Route::post('/intra-leaderboard/set-overall', [IntraLeaderboardController::class, 'setOverallRanking'])->name('intra-leaderboard.set-overall');
+// Route::post('/intra-leaderboard/set-overall', [IntraLeaderboardController::class, 'setOverallRanking'])->name('intra-leaderboard.set-overall');
+
+// List all events for updating golds
+Route::get('/intramurals/Department Points/event-list', [IntraLeaderboardController::class, 'eventList'])
+    ->name('intramurals.Department Points.event-list');
+
+// Show form to set golds for a specific event
+Route::get('/intramurals/Department Points/event/{event}/edit-gold', [IntraLeaderboardController::class, 'editGold'])
+    ->name('intramurals.Department Points.edit-gold');
+
+// Save gold points for the selected event
+Route::post('/intramurals/Department Points/event/{event}/update-gold', [IntraLeaderboardController::class, 'updateGold'])
+    ->name('intramurals.Department Points.update-gold');
+
+
+
+
+
+// ------------------------INTRAMURALS USER ROUTES-------------------------||
+// Update leaderboard for users to view
+Route::get('intramurals/home', [UserLeaderboardController::class, 'index'])->name('intramurals.Leaderboard.user-leaderboard');
+
+// View events for users
+Route::get('intramurals/events', [UserEventController::class, 'index'])->name('intramurals.Events.user-events');
+
 
 
 

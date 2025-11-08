@@ -17,5 +17,9 @@ class DatabaseSeeder extends Seeder
 
         // Seed intra colleges
         $this->call(IntraCollegesTableSeeder::class);
+
+        // Seed intra leaderboard
+        $this->call(IntraLeaderboardSeeder::class);
+
     }
 }
