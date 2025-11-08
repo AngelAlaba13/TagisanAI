@@ -20,10 +20,12 @@ use App\Http\Controllers\Admin\Intramurals\IntraLeaderboardController;
 // User Controllers INTRAMURALS
 use App\Http\Controllers\Admin\Intramurals\UserLeaderboardController;
 use App\Http\Controllers\Admin\Intramurals\UserEventController;
+use App\Http\Controllers\Admin\Intramurals\UserCollegesController;
 
 
-// AI OCR Feature Controller
+// AI OCR and Chatbot Feature Controller
 use App\Http\Controllers\Admin\OCRController;
+use App\Http\Controllers\Admin\IsaiChatbotController;
 
 // Error Handling Controllers
 use App\Http\Controllers\ErrorHandlingController;
@@ -128,7 +130,8 @@ Route::get('intramurals/home', [UserLeaderboardController::class, 'index'])->nam
 // View events for users
 Route::get('intramurals/events', [UserEventController::class, 'index'])->name('intramurals.Events.user-events');
 
-
+// View colleges for users
+Route::get('intramurals/colleges', [UserCollegesController::class, 'index'])->name('intramurals.Colleges.user-colleges');
 
 
 
@@ -150,3 +153,7 @@ Route::get('/error/520', [App\Http\Controllers\ErrorHandlingController::class, '
 // OCR Feature
 Route::get('/intramurals/Manage Events/add-events', [OCRController::class, 'index'])->name('ocr.index');
 Route::post('/ocr/vision-extract', [OCRController::class, 'visionExtract'])->name('admin.ocr.extract');
+
+
+// ------------------------ISAI CHATBOT Test Routes-------------------------||
+Route::get('/isai-chatbot', [IsaiChatbotController::class, 'index'])->name('isai-chatbot');

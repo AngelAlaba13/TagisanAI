@@ -33,10 +33,10 @@
 
             <div class=" flex flex-row justify-center items-center gap-16 text-white text-lg font-semibold font-poppins">
                 <a href="{{ route('intramurals.Leaderboard.user-leaderboard') }}">Home</a>
-                <a href="">Colleges</a>
+                <a href="{{route('intramurals.Colleges.user-colleges')}}">Colleges</a>
                 <a href="{{ route('intramurals.Events.user-events') }}">Events</a>
                 <div class="flex flex-row justify-center items-center gap-5 relative">
-                    <a href="" class="underline">Ask IsAI</a>
+                    <a href="{{ route('isai-chatbot') }}" class="underline">Ask IsAI</a>
                     <img src="{{ Vite::asset('resources/images/isai-logo.png') }}" alt="IsAI Logo" class="absolute right-[-20px] top-0 h-4">
                 </div>
             </div>
