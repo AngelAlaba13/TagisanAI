@@ -39,8 +39,8 @@
             <!-- Table Head -->
             <thead>
               <tr class="text-dark dark:text-light text-lg font-semibold">
-                <th class="px-6 py-3 border-b bg-[hsl(23,100%,82%)] dark:bg-zinc-800/60 border-gray-500 dark:border-gray-600 text-left">Rank</th>
-                <th class="px-6 py-3 border-b bg-[hsl(23,100%,82%)] dark:bg-zinc-800/60 border-gray-500 dark:border-gray-600 text-left">Department</th>
+                <th class="pl-6 pr-0 py-3 border-b bg-[hsl(23,100%,82%)] dark:bg-zinc-800/60 border-gray-500 dark:border-gray-600 text-left">Rank</th>
+                <th class=" py-3 border-b bg-[hsl(23,100%,82%)] dark:bg-zinc-800/60 border-gray-500 dark:border-gray-600 text-left">Department</th>
                 <th class="px-6 py-3 border-b bg-[hsl(23,100%,82%)] dark:bg-zinc-800/60 border-gray-500 dark:border-gray-600 text-center">Current Points</th>
                 <th class="px-6 py-3 border-b bg-[hsl(23,100%,82%)] dark:bg-zinc-800/60 border-gray-500 dark:border-gray-600 text-center">Set Golds</th>
               </tr>
@@ -50,14 +50,14 @@
             <tbody class="text-dark dark:text-light text-base">
               @foreach($leaderboard as $item)
               <tr class="hover:bg-[#FFE9C6]/70 dark:hover:bg-zinc-800/20 transition duration-200">
-                <td class="px-6 py-4 font-bold border-b border-gray-400/70 dark:border-gray-600">{{ $item->rank }}</td>
-                <td class="px-6 py-4 border-b border-gray-400/70 dark:border-gray-600">
+                <td class="pl-6 pr-0  font-bold border-b border-gray-400/70 dark:border-gray-600">{{ $item->rank }}</td>
+                <td class="py-3 border-b border-gray-400/70 dark:border-gray-600">
                   <span class="font-bold">{{ $item->IntraCollege->college_code }}</span> {{ $item->IntraCollege->college_name }}
                 </td>
                 <td class="px-6 py-4 text-center border-b border-gray-400/70 dark:border-gray-600">{{ $item->total_gold }}</td>
                 <td class="px-6 py-4 text-center border-b border-gray-400/70 dark:border-gray-600">
-                  <a href="{{ route('intramurals.Department Points.event-list') }}"
-                     class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-xs md:text-sm px-3 py-1 rounded-full shadow-sm transition duration-200">
+                  <a href="{{ route('localMasts.Campus Points.localM-event-list') }}"
+                     class="inline-block bg-green-600 hover:bg-green-700 text-white text-xs md:text-sm px-3 py-1 rounded-full shadow-sm transition duration-200">
                     Update
                   </a>
                 </td>

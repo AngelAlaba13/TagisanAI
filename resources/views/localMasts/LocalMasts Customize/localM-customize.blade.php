@@ -7,14 +7,14 @@
     @vite('resources/css/app.css')
 </head>
 <body class="bg-bglight dark:bg-bgdark min-h-screen w-full overflow-x-hidden font-poppins">
-    @include('intramurals.intramurals-sidepanel')
+    @include('localMasts.localMasts-sidepanel')
     
     <div class="min-h-screen pl-28 pt-12 pr-28">
         <!-- Page Header -->
         <div>
           <p class="text-4xl font-semibold text-dark dark:text-light">Customize</p>
           <p class="text-lg text-dark/60 dark:text-light/60 py-2">
-            Add more personality to your leaderboard by customizing its appearance and settings. 
+            Add more personality to your AI chatbot by adding knowledge to its dataset. 
           </p>
         </div>
 

@@ -1,40 +1,42 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Intramurals;
+namespace App\Http\Controllers\Admin\LocalMasts;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-use App\Models\intramurals\intraEvent;
+use App\Models\localMasts\localEvent;
 
-class IntraEventController extends Controller
+class LocalEventController extends Controller
 {
-    // Display a listing of the resource.
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         // Fetch all events from the database
-        $events = intraEvent::orderBy('created_at', 'desc')->paginate(10);
+        $localEvents = localEvent::orderBy('created_at', 'desc')->paginate(10);
 
-        // Return view with eve nts
-        return view('intramurals.Manage Events.manage-events', compact('events'));
+        // Return view with events
+        return view('localMasts.Manage Events.manage-localM-events', compact('localEvents'));
     }
 
-
-
-    // -----------CREATE and STORE method. Continue-----------
-
-    // Show the form for creating a new resource.
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         // Get all PNG filenames from public/icons
         $icons = collect(File::files(public_path('icons')))
                     ->map(fn($file) => $file->getFilename());
 
-        return view('intramurals.Manage Events.add-events', compact('icons'));
+        return view('localMasts.Manage Events.add-localM-events', compact('icons'));
     }
 
-    // Store a newly created resource in storage.
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -44,14 +46,14 @@ class IntraEventController extends Controller
             'icon' => 'nullable|string|max:100',
         ]);
 
-        intraEvent::create([
+        localEvent::create([
             'event_name' => $request->event_name,
             'category'   => $request->category,
             'description'=> $request->description,
             'icon'       => $request->icon,
         ]);
 
-        return redirect()->route('intramurals.Manage Events.manage-events')
+        return redirect()->route('localMasts.Manage Events.manage-localM-events')
                      ->with('success', 'Event created successfully!');
     }
 
@@ -69,7 +71,7 @@ class IntraEventController extends Controller
         ]);
 
         foreach ($data['events'] as $ev) {
-            intraEvent::create([
+            localEvent::create([
                 'event_name' => $ev['event_name'],
                 'category' => $ev['category'],
                 'description' => $ev['description'] ?? null,
@@ -80,36 +82,36 @@ class IntraEventController extends Controller
         return response()->json(['message' => 'Events saved successfully'], 201);
     }
 
-    
-    // // Display the specified resource.
-    // public function show(string $id)
-    // {
-    //     $event = intraEvent::findOrFail($id);
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
 
-    //     return view('intramurals.Manage Events.show-event', compact('events'));
-    // }
-
-
-    // -----------EDIT and UPDATE methods. Continue-----------
-
-    // Show the form for editing the specified resource.
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit(string $id)
     {
         // Load event and icons, then return edit view
-        $events = intraEvent::findOrFail($id);
+        $localEvents = localEvent::findOrFail($id);
 
         // Get all PNG filenames from public/icons
         $icons = collect(File::files(public_path('icons')))
                     ->map(fn($file) => $file->getFilename());
         
 
-        return view('intramurals.Manage Events.edit-events', compact('events', 'icons'));
+        return view('localMasts.Manage Events.edit-localM-events', compact('localEvents', 'icons'));
     }
 
-    // Update the specified resource in storage.
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, string $id)
     {
-        $events = intraEvent::findOrFail($id);
+        $localEvents = localEvent::findOrFail($id);
 
         $validated = $request->validate([
             'event_name' => 'required|string|max:150',
@@ -118,26 +120,26 @@ class IntraEventController extends Controller
             'icon' => 'nullable|string|max:100',
         ]);
 
-        $events->update([
+        $localEvents->update([
             'event_name' => $validated['event_name'],
             'category' => $validated['category'],
             'description' => $validated['description'] ?? null,
             'icon' => $validated['icon'] ?? null,
         ]);
 
-        return redirect()->route('intramurals.Manage Events.manage-events')
+        return redirect()->route('localMasts.Manage Events.manage-localM-events')
                          ->with('success', 'Event updated successfully!');
     }
 
-
-
-    // Remove the specified resource from storage.
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(string $id)
     {
-        $events = intraEvent::findOrFail($id);
-        $events->delete();
+        $localEvents = localEvent::findOrFail($id);
+        $localEvents->delete();
 
-        return redirect()->route('intramurals.Manage Events.manage-events')
+        return redirect()->route('localMasts.Manage Events.manage-localM-events')
                          ->with('success', 'Event deleted successfully!');
     }
 }

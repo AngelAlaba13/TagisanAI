@@ -10,7 +10,7 @@
 
     <header class="fixed top-0 left-0 w-full z-50">
         <div class="w-full h-16 flex justify-center items-center px-4 bg-gradient-to-r from-[#FE8203] via-[rgb(252,170,19)] to-[#F8A50B] transition-colors duration-300">
-            <img src="{{ Vite::asset('resources/images/logo-all-white.png') }}" alt="TagisanAI Logo" class="h-12">
+            <img src="{{ asset('logos/logo-all-white.png') }}" alt="TagisanAI Logo" class="h-12">
 
             <!-- light-dark toggle -->
             <div class="absolute right-8">

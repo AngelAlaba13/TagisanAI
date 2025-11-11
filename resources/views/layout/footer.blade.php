@@ -14,7 +14,7 @@
       <!-- Logo + Links -->
       <div class="w-full flex flex-col md:flex-row justify-between items-center md:items-start gap-10 md:gap-0">
         <!-- Logo -->
-        <img src="{{ Vite::asset('resources/images/logo-all-white.png') }}" alt="TagisanAI Logo" class="h-16 md:h-20">
+        <img src="{{ asset('logos/logo-all-white.png') }}" alt="TagisanAI Logo" class="h-16 md:h-20">
 
         <!-- Useful Links -->
         <div class="text-white w-full md:w-auto flex flex-col items-center md:items-start">

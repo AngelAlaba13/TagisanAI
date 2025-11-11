@@ -10,4 +10,9 @@ class LocalMastsController extends Controller
     {
         return view('localMasts.Campus Points.campus-points');
     }
+
+    public function customize()
+    {
+        return view('localMasts.LocalMasts Customize.localM-customize');
+    }
 }

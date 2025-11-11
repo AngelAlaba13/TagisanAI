@@ -49,27 +49,27 @@
             <!-- Navigation -->
             <ul class=" font-poppins font-medium text-md md:text-xl space-y-2 px-2 md:px-4">
                 <li>
-                    <a href="{{route('intramurals.Department Points.department-points')}}" class="hover:bg-[#ffc30e] hover:text-dark rounded-lg py-3 md:px-4 transition-all duration-300">
-                        Department Points
+                    <a href="{{route('localMasts.Campus Points.campus-points')}}" class="hover:bg-[#ffc30e] hover:text-dark rounded-lg py-3 md:px-4 transition-all duration-300">
+                        Campus Points
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('intramurals.Manage Departments.manage-departments')}}" class="hover:bg-[#ffc30e] hover:text-dark rounded-lg py-3 md:px-4 transition-all duration-300">
-                        Manage Departments
+                    <a href="{{route('localMasts.Manage Campuses.manage-localM-campuses')}}" class="hover:bg-[#ffc30e] hover:text-dark rounded-lg py-3 md:px-4 transition-all duration-300">
+                        Manage Campuses
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('intramurals.Manage Events.manage-events')}}" class="hover:bg-[#ffc30e] hover:text-dark rounded-lg py-3 md:px-4 transition-all duration-300">
+                    <a href="{{route('localMasts.Manage Events.manage-localM-events')}}" class="hover:bg-[#ffc30e] hover:text-dark rounded-lg py-3 md:px-4 transition-all duration-300">
                         Manage Events
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('intramurals.Intramurals Customize.intramurals-customize')}}" class="hover:bg-[#ffc30e] hover:text-dark rounded-lg py-3 md:px-4 transition-all duration-300">
+                    <a href="{{route('localMasts.LocalMasts Customize.localM-customize')}}" class="hover:bg-[#ffc30e] hover:text-dark rounded-lg py-3 md:px-4 transition-all duration-300">
                         Customize
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('intramurals.Department Points.department-points')}}" class="hover:bg-[#ffc30e] hover:text-red-600 rounded-lg py-3 md:px-4 transition-all duration-300">
+                    <a href="{{route('localMasts.Campus Points.campus-points')}}" class="hover:bg-[#ffc30e] hover:text-red-600 rounded-lg py-3 md:px-4 transition-all duration-300">
                         Logout
                     </a>
                 </li>

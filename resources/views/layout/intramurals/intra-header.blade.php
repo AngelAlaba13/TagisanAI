@@ -27,7 +27,7 @@
                 </div>
             
                 <div>
-                    <img src="{{ Vite::asset('resources/images/logo-all-white.png') }}" alt="TagisanAI Logo" class=" h-11">
+                    <img src="{{ asset('logos/logo-all-white.png') }}" alt="TagisanAI Logo" class=" h-11">
                 </div>
             </div>
 
@@ -37,7 +37,7 @@
                 <a href="{{ route('intramurals.Events.user-events') }}">Events</a>
                 <div class="flex flex-row justify-center items-center gap-5 relative">
                     <a href="{{ route('isai-chatbot') }}" class="underline">Ask IsAI</a>
-                    <img src="{{ Vite::asset('resources/images/isai-logo.png') }}" alt="IsAI Logo" class="absolute right-[-20px] top-0 h-4">
+                    <img src="{{ asset('logos/isai-logo.png') }}" alt="IsAI Logo" class="absolute right-[-20px] top-0 h-4">
                 </div>
             </div>
 
