@@ -43,7 +43,9 @@
             <div class="flex flex-col gap-2 mt-4 sm:mt-0">
               <p>Chat with IsAI</p>
               <p>View Archives</p>
-              <p>Conduct an Event</p>
+              <a href="{{ route('conductEvent.create') }}" class="hover:underline">
+                Conduct an Event
+              </a>
             </div>
           </div>
         </div>

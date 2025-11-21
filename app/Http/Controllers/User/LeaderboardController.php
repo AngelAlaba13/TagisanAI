@@ -24,6 +24,6 @@ class LeaderboardController extends Controller
         // ✅ Otherwise, switch to that event's database
         DatabaseHelper::switchConnection($activeEvent);
 
-        return view('adminPanel.main', compact('activeEvent'));
+        return view('OtherFiles.DefaultHome.defaultHome', compact('activeEvent'));
     }
 }

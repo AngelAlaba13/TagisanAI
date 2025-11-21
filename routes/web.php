@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Default Home Controller 
+use App\Http\Controllers\TryoutsController;
+
 // Page Navigation Controllers
 use App\Http\Controllers\IntramuralsController;
 use App\Http\Controllers\LocalMastsController;
@@ -9,6 +12,10 @@ use App\Http\Controllers\OtherEventsController;
 
 // Admin Controllers
 use App\Http\Controllers\Admin\EventSelectionController;
+
+// Be an Admin and Conduct an Event
+use App\Http\Controllers\ConductEventController;
+use App\Http\Controllers\User\LoginController;
 
 
 // Database Controllers INTRAMURALS
@@ -48,7 +55,7 @@ use App\Http\Controllers\ErrorHandlingController;
 */
 
 Route::get('/', function () {
-    return view('adminPanel.main');
+    return view('loginAdmin');
 });
 
 
@@ -58,6 +65,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ->name('set-active-event');
 });
 
+// Login Routes
+Route::resource('loginAdmin', LoginController::class);
+
+// Route for the ADMIN
+route::get('/adminPanel', [ConductEventController::class, 'adminPanel'])->name('adminPanel.index');
+
+// Default Home if no events
+Route::resource('tryouts', TryoutsController::class);
+Route::get('/home', [TryoutsController::class, 'index'])->name('OtherFiles.DefaultHome.default-home');
+Route::get('/tryouts/create', [TryoutsController::class, 'create'])->name('OtherFiles.DefaultHome.create-tryouts');
+
+// Be an Admin and Conduct an Event
+Route::get('/conductEvent/create', [ConductEventController::class, 'create'])->name('conductEvent.create');
+Route::post('/conductEvent', [ConductEventController::class, 'store'])->name('conductEvent.store');
+Route::get('/conductEvent/pending', [ConductEventController::class, 'pending'])->name('conductEvent.pending');
 
 
 

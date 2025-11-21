@@ -11,6 +11,9 @@
     <!-- Header -->
     @include('layout.header')
 
+    <!-- sidepanel -->
+    @include('OtherFiles.DefaultHome.admin-sidepanel')
+
     <!-- Title -->
     <div class="pt-32 md:pt-40 pb-8 md:pb-12 flex justify-center items-center text-center px-4">
         <h1 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-dark dark:text-light leading-snug">

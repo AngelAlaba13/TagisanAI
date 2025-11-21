@@ -69,7 +69,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('intramurals.Department Points.department-points')}}" class="hover:bg-[#ffc30e] hover:text-red-600 rounded-lg py-3 md:px-4 transition-all duration-300">
+                    <a href="{{route('loginAdmin.index')}}" class="hover:bg-[#ffc30e] hover:text-red-600 rounded-lg py-3 md:px-4 transition-all duration-300">
                         Logout
                     </a>
                 </li>

@@ -56,7 +56,7 @@
                 </td>
                 <td class="px-6 py-4 text-center border-b border-gray-400/70 dark:border-gray-600">{{ $item->total_gold }}</td>
                 <td class="px-6 py-4 text-center border-b border-gray-400/70 dark:border-gray-600">
-                  <a href="{{ route('localMasts.Campus Points.localM-event-list') }}"
+                  <a href="{{ route('intramurals.Department Points.event-list') }}"
                      class="inline-block bg-green-600 hover:bg-green-700 text-white text-xs md:text-sm px-3 py-1 rounded-full shadow-sm transition duration-200">
                     Update
                   </a>
