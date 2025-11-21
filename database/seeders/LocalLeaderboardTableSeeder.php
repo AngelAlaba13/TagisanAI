@@ -19,14 +19,38 @@ class LocalLeaderboardTableSeeder extends Seeder
         $campuses = localCampuses::all();
         $localEvents = localEvent::all();
 
+
+        /**
+         * 1️⃣ ALWAYS create a leaderboard row for each campus
+         *     with NO EVENT (event_id = null)
+         */
         foreach ($campuses as $campus) {
-            foreach ($localEvents as $event) {
-                localLeaderboard::firstOrCreate([
+            localLeaderboard::firstOrCreate(
+                [
                     'campus_id' => $campus->id,
-                    'event_id' => $event->id,
-                ], [
+                    'event_id' => null,   // NULL means general campus points
+                ],
+                [
                     'gold' => 0,
-                ]);
+                ]
+            );
+        }
+
+
+        /**
+         * 2️⃣ If events exist, create leaderboard rows PER EVENT
+         */
+        foreach ($localEvents as $event) {
+            foreach ($campuses as $campus) {
+                localLeaderboard::firstOrCreate(
+                    [
+                        'campus_id' => $campus->id,
+                        'event_id' => $event->id,
+                    ],
+                    [
+                        'gold' => 0,
+                    ]
+                );
             }
         }
     }

@@ -19,6 +19,23 @@ class IntraLeaderboardSeeder extends Seeder
         $colleges = intraColleges::all();
         $events = intraEvent::all();
 
+
+        /**
+         * 1️⃣ ALWAYS create a leaderboard row for each campus
+         *     with NO EVENT (event_id = null)
+         */
+        foreach ($colleges as $college) {
+            intraLeaderboard::firstOrCreate(
+                [
+                    'college_id' => $college->id,
+                    'event_id' => null,   // NULL means general campus points
+                ],
+                [
+                    'gold' => 0,
+                ]
+            );
+        }
+
         foreach ($colleges as $college) {
             foreach ($events as $event) {
                 intraLeaderboard::firstOrCreate([

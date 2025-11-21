@@ -16,7 +16,7 @@ return new class extends Migration
 
             // content of table
             $table->foreignId('campus_id')->constrained('local_masts_campuses')->onDelete('cascade');
-            $table->foreignId('event_id')->constrained('local_masts_event')->onDelete('cascade');
+            $table->foreignId('event_id')->nullable()->constrained('local_masts_event')->onDelete('cascade');
 
             $table->integer('gold')->default(0);
 

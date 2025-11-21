@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\IntraCollegesTableSeeder;
 use Database\Seeders\IntraLeaderboardSeeder;
 use Database\Seeders\LocalCampusesTableSeeder;
+use Database\Seeders\LocalLeaderboardTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,5 +26,8 @@ class DatabaseSeeder extends Seeder
 
         // Seed local campuses
         $this->call(LocalCampusesTableSeeder::class);
+
+        // Seed local leaderboard
+        $this->call(LocalLeaderboardTableSeeder::class);
     }
 }

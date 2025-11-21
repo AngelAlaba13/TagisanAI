@@ -16,7 +16,7 @@ return new class extends Migration
 
             // content of table
             $table->foreignId('college_id')->constrained('intra_colleges')->onDelete('cascade');
-            $table->foreignId('event_id')->constrained('intra_event')->onDelete('cascade');
+            $table->foreignId('event_id')->nullable()->constrained('intra_event')->onDelete('cascade');
 
             $table->integer('gold')->default(0);
 
